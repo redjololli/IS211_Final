@@ -1,0 +1,8 @@
+#login_form_container {
+    max-width: 600px;
+}
+
+#search_form {
+    max-width: 360px;
+    margin: 0 auto;
+}

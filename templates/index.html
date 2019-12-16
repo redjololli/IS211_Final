@@ -1,0 +1,45 @@
+{% include 'header.html' %}
+
+<div class="row">
+    <div class="col-md-6">
+        <form action="/logout" method="GET">
+            <h5>User : {{ user }} <input type="submit" class="btn btn-danger mb-2" value="Logout"></h5>
+        </form>
+    </div>
+
+    <div class="col-md-6">
+        <form action="/search" method="GET" class="form-inline" id="search_form">
+            <label class="sr-only" for="search">Enter ISBN / Book Title</label>
+            <input type="text" class="form-control mb-2 mr-sm-2" id="search" name="search" placeholder="Enter ISBN / Book Title">
+    
+            <button type="submit" class="btn btn-primary mb-2">Search Books</button>
+        </form>
+    </div>
+</div>
+
+<h3>{{ books|length }} <strong>Book/s in your catalog</strong></h3>
+
+
+{% for book in books %}
+<hr>
+<div class="row">
+    <div class="col-sm-3">
+        <img src="{{ book.thumbnail_url }}" alt="{{ book.title }}" class="img-thumbnail">
+    </div>
+    <div class="col-sm-6">
+        <h4>{{ book.title }}</h4>
+        <p><strong>Author/s : </strong>{{ book.authors }}</p>
+        <p><strong>Page Count : </strong>{{ book.pageCount }}</p>
+        <p><strong>Rating : </strong>{{ book.rating }}</p>
+    </div>
+    <div class="col-sm-3">
+        <form action="/deletebook" method="POST">
+            <input type="hidden" name="isbn" value="{{ book.isbn }}">
+            <input type="submit" value="Delete Book" class="btn btn-danger">
+        </form>
+    </div>
+</div>
+{% endfor %}
+
+
+{% include 'footer.html' %}
